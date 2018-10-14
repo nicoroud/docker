@@ -1,20 +1,20 @@
 # On part d'une distribution debian
 FROM debian:latest
 
-MAINTAINER Nicolas Roudninski <nicoroud@gmail.com>
+MAINTAINER Nicolas Roudninski <nroudninski@protonmail.com>
 
-# Remove non-critical packages
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends aptitude \
-    && apt-get purge -y $(aptitude search '~i!~M!~prequired!~pimportant!~R~prequired!~R~R~prequired!~R~pimportant!~R~R~pimportant!busybox!grub!initramfs-tools' | awk '{print $2}') \
-    && apt-get purge -y aptitude \
-    && apt-get autoremove -y --purge
-RUN echo "APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;" >/etc/apt/apt.conf
+# On vire les paquets non crtiques
+RUN apt-get update && apt-get upgrade -y && \
+apt-get install -y --no-install-recommends aptitude && \
+apt-get purge -y $(aptitude search '~i!~M!~prequired!~pimportant!~R~prequired!~R~R~prequired!~R~pimportant!~R~R~pimportant!busybox!grub!initramfs-tools' | awk '{print $2}') && \
+apt-get purge -y aptitude && \
+apt-get autoremove -y --purge && \
+echo "APT::Install-Recommends "0" ; APT::Install-Suggests "0" ;" >/etc/apt/apt.conf
 
 # Déplacement vers un dossier
 WORKDIR /tmp/
 
-# Configure timezone and locale
+# On configure la timezone et les locales
 RUN export DEBIAN_FRONTEND=noninteractive
 ENV LANG fr_FR.UTF-8
 ENV LANGUAGE fr_FR:en
@@ -39,7 +39,7 @@ RUN echo "deb http://repository.crdp.ac-versailles.fr/debian xia main" | tee /et
 wget -q http://repository.crdp.ac-versailles.fr/crdp.gpg -O - | apt-key add - && \
 apt-get update && apt-get install -y xia
 
-# Remove non-used packages
+# On vire les paquets inutiles
 RUN echo "localepurge localepurge/nopurge multiselect fr, fr_FR, fr_FR.UTF8" | debconf-set-selections && \
 export DEBIAN_FRONTEND=noninteractive && \
 apt-get install -y --no-install-recommends localepurge && \
@@ -50,7 +50,7 @@ apt-get autoremove -y --purge && \
 apt-get clean -y && \
 rm -fr /usr/share/man/*
 
-# Add user
+# On ajoute l'utilisateur local du système hôte
 ARG UNAME=nicolas
 ARG UID=1000
 ARG GID=993
