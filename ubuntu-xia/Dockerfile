@@ -28,7 +28,7 @@ locale-gen fr_FR.UTF-8
 # Mise à jour et installation des dépendances
 #RUN apt-get update && apt-get install -y apt-utils && apt-get upgrade -y
 
-# installation de wget et gnupg2 (pour apt-key)
+# On installe wget et gnupg2 (pour apt-key)
 RUN apt-get install -y --no-install-recommends wget gnupg2
 
 # installation de inkscape
