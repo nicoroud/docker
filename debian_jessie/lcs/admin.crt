@@ -1,0 +1,55 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: C=FR, ST=Basse Normandie, L=Brecey, O=Pierre aguiton, CN=Lcs/emailAddress=admin@brecey.clg50.ac-caen.fr
+        Validity
+            Not Before: Sep 27 11:41:57 2009 GMT
+            Not After : Sep 25 11:41:57 2019 GMT
+        Subject: C=FR, ST=Basse Normandie, O=Pierre aguiton, CN=admin/emailAddress=admin@brecey.clg50.ac-caen.fr
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:d4:86:f2:c4:06:d7:f7:df:f8:6e:87:e2:11:ed:
+                    19:e7:f9:4d:8a:7e:44:ae:db:c2:05:b8:55:9e:28:
+                    e2:e7:1d:e1:27:a4:26:d6:33:3b:c2:38:59:2a:a9:
+                    ac:01:95:67:52:15:9a:14:67:cd:37:96:34:8f:e3:
+                    5b:8f:70:7e:57:ca:a2:3a:c4:f1:01:07:b8:d6:8f:
+                    f7:74:33:8c:f8:f2:de:4d:69:35:4a:7d:96:c0:9c:
+                    68:d4:25:67:77:fa:5f:49:4d:a3:33:67:72:5c:cf:
+                    53:d4:2c:f4:53:28:53:f9:c2:56:1e:d3:7b:fb:23:
+                    ae:15:44:9f:4f:af:66:e1:29
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+    Signature Algorithm: md5WithRSAEncryption
+        2d:98:98:4b:c6:0c:05:5b:f7:39:ee:89:99:9b:ee:10:16:4b:
+        90:df:cf:44:0e:d7:49:64:11:1f:ef:c8:f2:c7:98:32:29:9d:
+        05:40:87:0b:41:dd:f2:2e:05:9b:e0:e9:01:4c:2d:d5:a6:7e:
+        d2:5e:1c:18:8c:b1:83:d4:f9:35:26:3a:8c:df:2c:8e:1d:b2:
+        fb:bc:da:38:b8:5e:92:cb:6b:4a:9c:61:64:08:8c:09:ba:86:
+        70:cf:4c:9c:dc:53:10:2b:46:6b:c0:65:f6:0c:6b:30:75:ad:
+        39:c5:5f:b1:24:54:d6:e4:bd:28:b1:54:71:60:40:ba:05:7b:
+        a8:27
+-----BEGIN CERTIFICATE-----
+MIICvTCCAiagAwIBAgIBAjANBgkqhkiG9w0BAQQFADCBjTELMAkGA1UEBhMCRlIx
+GDAWBgNVBAgTD0Jhc3NlIE5vcm1hbmRpZTEPMA0GA1UEBxMGQnJlY2V5MRcwFQYD
+VQQKEw5QaWVycmUgYWd1aXRvbjEMMAoGA1UEAxMDTGNzMSwwKgYJKoZIhvcNAQkB
+Fh1hZG1pbkBicmVjZXkuY2xnNTAuYWMtY2Flbi5mcjAeFw0wOTA5MjcxMTQxNTda
+Fw0xOTA5MjUxMTQxNTdaMH4xCzAJBgNVBAYTAkZSMRgwFgYDVQQIEw9CYXNzZSBO
+b3JtYW5kaWUxFzAVBgNVBAoTDlBpZXJyZSBhZ3VpdG9uMQ4wDAYDVQQDEwVhZG1p
+bjEsMCoGCSqGSIb3DQEJARYdYWRtaW5AYnJlY2V5LmNsZzUwLmFjLWNhZW4uZnIw
+gZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANSG8sQG1/ff+G6H4hHtGef5TYp+
+RK7bwgW4VZ4o4ucd4SekJtYzO8I4WSqprAGVZ1IVmhRnzTeWNI/jW49wflfKojrE
+8QEHuNaP93QzjPjy3k1pNUp9lsCcaNQlZ3f6X0lNozNnclzPU9Qs9FMoU/nCVh7T
+e/sjrhVEn0+vZuEpAgMBAAGjOzA5MAkGA1UdEwQCMAAwLAYJYIZIAYb4QgENBB8W
+HU9wZW5TU0wgR2VuZXJhdGVkIENlcnRpZmljYXRlMA0GCSqGSIb3DQEBBAUAA4GB
+AC2YmEvGDAVb9znuiZmb7hAWS5Dfz0QO10lkER/vyPLHmDIpnQVAhwtB3fIuBZvg
+6QFMLdWmftJeHBiMsYPU+TUmOozfLI4dsvu82ji4XpLLa0qcYWQIjAm6hnDPTJzc
+UxArRmvAZfYMazB1rTnFX7EkVNbkvSixVHFgQLoFe6gn
+-----END CERTIFICATE-----

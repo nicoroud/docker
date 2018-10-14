@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    openboard-app:
+        container_name: openboard_app
+        image: ubuntuopenboard
+        restart: unless-stopped

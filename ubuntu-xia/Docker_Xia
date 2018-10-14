@@ -1,0 +1,42 @@
+# On part d'une distribution ubuntu qui permet l'éxécution de Haroopad
+FROM ubuntu
+MAINTAINER Nicolas Roudninski <nicoroud@gmail.com>
+
+# Déplacement vers un dossier
+WORKDIR /tmp/
+
+## for apt to be noninteractive
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
+# Mise à jour et installation des dépendances
+RUN apt-get update && apt-get install -y apt-utils && apt-get upgrade -y
+
+## preesed tzdata, update package index, upgrade packages and install needed software
+RUN echo "tzdata tzdata/Areas select Europe" > /tmp/preseed.txt; \
+    echo "tzdata tzdata/Zones/Europe select Paris" >> /tmp/preseed.txt; \
+    debconf-set-selections /tmp/preseed.txt && \
+#    rm /etc/timezone && \
+#    rm /etc/localtime && \
+#    apt-get update && \
+    apt-get install -y tzdata
+
+# installation de wget
+RUN apt-get install -y --no-install-recommends wget
+
+# installation de gnupg2
+RUN apt-get install -y --no-install-recommends gnupg2
+
+# installation de inkscape
+RUN apt-get install -y inkscape
+
+# installation de xia
+RUN echo "deb http://repository.crdp.ac-versailles.fr/debian xia main" | tee /etc/apt/sources.list.d/xia.list
+RUN wget -q http://repository.crdp.ac-versailles.fr/crdp.gpg -O - | apt-key add -
+RUN apt-get update && apt-get install -y xia
+
+## cleanup of files from setup
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Exécution du logiciel
+CMD /usr/bin/xia

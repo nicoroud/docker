@@ -1,0 +1,40 @@
+version: '3.1'
+
+services:
+  - docker
+
+  db:
+    image: mysql
+    container_name: se3mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: PdTza455
+    networks:
+      default:
+        ipv4_address: localhost
+
+  adminer:
+    image: adminer
+    container_name: se3adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  se3:
+    depends_on:
+      - db
+    image: debian:jessie
+    container_name: dockerse3
+    build: .
+    networks:
+      default:
+        ipv4_address: localhost
+
+before_install:
+  - docker build -t se3:latest .
+        
+networks:
+    default:
+      external:
+        name: se3network

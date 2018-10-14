@@ -1,0 +1,11 @@
+# sources pour se3
+#deb http://wawadeb.crdp.ac-caen.fr/debian jessie se3
+
+#### Sources testing desactivee en prod ####
+deb http://wawadeb.crdp.ac-caen.fr/debian jessie se3testing
+
+### Sources experimental
+#deb http://wawadeb.crdp.ac-caen.fr/debian jessie se3XP
+
+#### Sources backports smb41  ####
+deb http://wawadeb.crdp.ac-caen.fr/debian jessie-backports smb41

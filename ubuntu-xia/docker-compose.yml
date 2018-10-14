@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    xia-app:
+        container_name: xia_app
+        image: debian/xia
+        restart: unless-stopped
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /home/nicolas/temp:/home/nicolas
+        environment:
+            DISPLAY: unix$DISPLAY
+            USER: nicolas

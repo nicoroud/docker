@@ -1,0 +1,43 @@
+# on part d'une debian de base
+FROM debian:jessie
+
+# Ajout des fichiers nécessaires
+ADD files/interfaces /etc/network/
+ADD files/hosts /etc/
+ADD files/hostname /etc/
+ADD files/resolv.conf /etc/
+ADD files/sources.list /etc/apt/
+ADD files/se3.list /etc/apt/sources.list.d/
+ADD se3.preseed /root/
+
+RUN debconf-set-selections -v /root/se3.preseed
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+    openvpn openssl easy-rsa openssh-server \
+    wget net-tools \
+    ntpdate ntp
+
+RUN mkdir /etc/se3
+ADD setup_se3.data /etc/se3/
+
+ADD pkg /root/pkg/
+# Install MySQL Server in a Non-Interactive mode. Default root password will be "root"
+RUN export DEBIAN_FRONTEND=noninteractive
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
+RUN apt-get -y install mysql-server
+
+ADD files/keyboard /etc/default/keyboard
+RUN export DEBIAN_FRONTEND=noninteractive
+RUN apt-get install --quiet --assume-yes \
+	lsb-release rsyslog ftp patch libnet-ldap-perl \
+#	libtalloc2 samba samba-common-bin \
+#	mysql-server \
+	mysql-client \
+	apache2 libapache2-mod-php5 \
+	wine python-mysqldb python-ldap 
+RUN DEBIAN_FRONTEND=noninteractive apt install -qq -y xserver-xorg-video-dummy
+
+ADD install_phase2.sh /root/
+RUN chmod +x /root/install_phase2.sh
+RUN /root/install_phase2.sh

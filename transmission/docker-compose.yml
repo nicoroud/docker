@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+	transmission:
+	container_name: transmission
+	image: linuxserver/transmission
+	restart: unless-stopped
+	ports:
+		- 9091:9091
+		- 51413:51413
+		- 51413:51413/udp
+	volumes:
+		- ${DOWNLOAD_DIR}:/downloads
+		- ${CONFIG_DIR}:/config
+		- ${RESUME_DIR}: ???
+	user: debian-transmission
+	TRANSMISSION_PASS
+		

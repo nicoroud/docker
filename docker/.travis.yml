@@ -1,0 +1,75 @@
+dist: trusty
+sudo: required
+
+services: docker
+
+language: bash
+
+branches:
+  only:
+    - master
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+before_script:
+  - env | sort
+  - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
+  - image="nextcloud:${VERSION}${VARIANT:+-$VARIANT}"
+  - if [[ "$ARCH" == 'i386' ]]; then sed -i -e 's/FROM php/FROM i386\/php/g' "${VERSION}/${VARIANT}/Dockerfile"; fi
+
+script:
+  - |
+    (
+      set -Eeuo pipefail
+      set -x
+      docker build -t "$image" "${VERSION}/${VARIANT}"
+      ~/official-images/test/run.sh "$image"
+      .travis/test-example-dockerfiles.sh "$image"
+    )
+
+after_script:
+  - docker images
+
+jobs:
+  include:
+    - &test-scripts
+      stage: test scripts
+      env: SCRIPT=update.sh
+      sudo: false
+      services: []
+      install: skip
+      before_script: skip
+      script:
+        - hash_before=$(git write-tree)
+        - ./update.sh
+        - bash -c "[[ $hash_before = $(git add -A && git write-tree) ]]"
+      after_script: skip
+
+    - <<: *test-scripts
+      env: SCRIPT=generate-stackbrew-library.sh
+      install:
+        - wget -O "$HOME/bin/bashbrew" https://doi-janky.infosiftr.net/job/bashbrew/lastSuccessfulBuild/artifact/bin/bashbrew-amd64
+        - chmod +x "$HOME/bin/bashbrew"
+      script:
+        - ./generate-stackbrew-library.sh
+
+    - stage: test images
+      env: VERSION=14.0-beta VARIANT=fpm-alpine ARCH=amd64
+    - env: VERSION=14.0-beta VARIANT=fpm-alpine ARCH=i386
+    - env: VERSION=14.0-beta VARIANT=fpm ARCH=amd64
+    - env: VERSION=14.0-beta VARIANT=fpm ARCH=i386
+    - env: VERSION=14.0-beta VARIANT=apache ARCH=amd64
+    - env: VERSION=14.0-beta VARIANT=apache ARCH=i386
+    - env: VERSION=12.0 VARIANT=fpm-alpine ARCH=amd64
+    - env: VERSION=12.0 VARIANT=fpm-alpine ARCH=i386
+    - env: VERSION=12.0 VARIANT=fpm ARCH=amd64
+    - env: VERSION=12.0 VARIANT=fpm ARCH=i386
+    - env: VERSION=12.0 VARIANT=apache ARCH=amd64
+    - env: VERSION=12.0 VARIANT=apache ARCH=i386
+    - env: VERSION=13.0 VARIANT=fpm-alpine ARCH=amd64
+    - env: VERSION=13.0 VARIANT=fpm-alpine ARCH=i386
+    - env: VERSION=13.0 VARIANT=fpm ARCH=amd64
+    - env: VERSION=13.0 VARIANT=fpm ARCH=i386
+    - env: VERSION=13.0 VARIANT=apache ARCH=amd64
+    - env: VERSION=13.0 VARIANT=apache ARCH=i386

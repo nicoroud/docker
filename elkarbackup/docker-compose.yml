@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+
+  db:
+    image: mysql:5.7.22
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - /data/backup/elkarbackup/mysql:/var/lib/mysql
+
+  elkarbackup:
+    image: elkarbackup/elkarbackup
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+        - /data/backup/elkarbackup/config:/etc/elkarbackup
+        - /data/backup/elkarbackup/data:/var/spool/elkarbackup
+    environment:
+      EB_DB_PASSWORD: 123456
