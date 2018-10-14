@@ -1,4 +1,4 @@
-# On part d'une distribution debian
+# On part d'une distribution Debian
 FROM debian:latest
 
 MAINTAINER Nicolas Roudninski <nroudninski@protonmail.com>
