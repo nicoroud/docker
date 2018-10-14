@@ -3,7 +3,7 @@ FROM debian:latest
 
 MAINTAINER Nicolas Roudninski <nroudninski@protonmail.com>
 
-# On vire les paquets non crtiques
+# On vire les paquets non critiques
 RUN apt-get update && apt-get upgrade -y && \
 apt-get install -y --no-install-recommends aptitude && \
 apt-get purge -y $(aptitude search '~i!~M!~prequired!~pimportant!~R~prequired!~R~R~prequired!~R~pimportant!~R~R~pimportant!busybox!grub!initramfs-tools' | awk '{print $2}') && \
